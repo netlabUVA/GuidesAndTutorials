@@ -1,12 +1,14 @@
-Rivanna Guide
+# Rivanna Guide
+
 Author: Teague R Henry
+
 11/2/2023
 
-# Before you log in:
+## Before you log in:
 -	You will need to be added to the correct MyGroups by your PI (me).
 -	Download and install the Cisco VPN Client, and log into UVA More Secure Network
 
-# Logging in: 
+## Logging in: 
 -	For PC users, install MobaXTerm
 -	For Mac users, install XQuartz from xquartz.org
 
@@ -17,7 +19,7 @@ Once installed, open up either MobaXterm or your Xterm (if on Mac. Make sure you
 
 If you are successful, you will see an enter your password prompt. When you type, it will look like nothing is happening, this is to be expected as Linux systems don't show passwords being typed.
 
-# Once Logged In:
+## Once Logged In:
 
 Once you are logged in, you will see text and a prompt that likely says something like `bash$<somenumbers>` If so, you have successfully logged into the system.
 
@@ -31,7 +33,7 @@ The most important tools for navigating around the system are the following comm
 
 Every user on Rivanna has a home directory, which allows for approximately 20gb of storage. This tends to be sufficient for simulation studies, so you will primarily be working out of your home directory. You will not have permissions to access any other directories (with few exceptions).
 
-# Modules in Rivanna: 
+## Modules in Rivanna: 
 
 Software in Rivanna is installed into modules which users have to activate. Once activated, you will be able to use that software. 
 
@@ -40,7 +42,7 @@ Software in Rivanna is installed into modules which users have to activate. Once
 - to activate a module, you use `module load <modulename>/<versionnumber>`. For example if you wanted to activate R, you would use `module load R/4.2.1`
 - If you are always going to want to have access to a module, you need to use the `module save` command. This saves the current module setup to your default configuration. If you don't do this, you will have to reload all your modules every time you log in.
 
-# Activating R:
+## Activating R:
 
 R takes a little bit more work to activate, as it has prerequisites. To activate R/4.2.1 (most current version as of 11/2/2023) run the following commands.
 
@@ -54,7 +56,7 @@ Once you've run those commands, you can start R by just typing `R`. This will br
 
 You will want to install your R packages within R. To do this, use the `install.packages` function. Once you install your packages, you shouldn't need to install them again for your Rivanna account. The packages are installed into your home directory in a hidden folder.
 
-# Rivanna as a Cluster
+## Rivanna as a Cluster
 
 Rivanna is a cluster, which means it's most useful when running many separate jobs (such as many different conditions in a simulation study.) Rivanna uses SLURM as its job management system. The idea behind this system is that you submit jobs to the cluster, SLURM then decides when to run these jobs (depending on priority, current load, and job settings), and once the jobs are complete, you work with the results. Importantly, these jobs are not interactive (they can be, but that's very advanced). 
 
@@ -66,7 +68,7 @@ We will be primarily submitting jobs via an R package, more on that later. But w
 
 - `scancel <jobid>` This cancels a currently running job by job ID. You can use wildcards here, which is useful for batch submitted jobs (i.e. to cancel all jobs that start with 1234567, you would use `scancel 1234567*`)
 
-# Submitting jobs via Rslurm 
+## Submitting jobs via Rslurm 
 
 The `rslurm` package is a very useful R package for automatically submitting slurm jobs. I won't get into the specific details of the functions, as there are examples of them in the example simulation study. I will detail a number of finicky bits when writing R code for rslurm submission.
 
@@ -88,9 +90,9 @@ Putting this all together, the steps to launching a simulation study are:
 5. Check to make sure the jobs are queued using `squeue`. If there are issues, look at the outfiles.
 
 
-# Other Useful Rivanna Things:
+## Other Useful Rivanna Things:
 
-## Editing text files directly on Rivanna
+### Editing text files directly on Rivanna
 
 You can use a text editor to modify files directly on Rivanna. This is extremely useful. I use a program called `vim`. `vim` is a very, _very_, complicated program that, in theory, allows you to customize your workflow to a very fine level. I don't use it like that, I just use it to modify text files. Here is how you use it.
 
@@ -98,7 +100,7 @@ You can use a text editor to modify files directly on Rivanna. This is extremely
 - When `vim` starts up, it is not in edit mode. To get into edit mode, type `a`. You will see text at the bottom of the screen saying `INSERT`. You can now type and modify the file. To leave insert mode, hit the `esc` key.
 - To save and quit out of `vim`, you need to leave insert mode, and type `:wq`, and hit enter. This stands for `write, then quit`, which saves the file (overwriting the original file).
 
-## Configuring your Rivanna experience
+### Configuring your Rivanna experience
 
 Linux systems can be configured to your preference in a very fine grained way. One example of this is with _aliases_. Aliases are ways of specifying a complex command or filepath in a more simple way. For example, you could have an alias for `squeue -u <yournetbadge>` as just `squeue`, so you don't need to constantly be writing `-u <yournetbadge>.` If you have a long file path that you always navigate to, you can alias it, for example `/a/long/file/path/to/some/directory/you/want/to/go/to` could be `target_dir`, and you could navigate to it by using `cd target_dir`. 
 
